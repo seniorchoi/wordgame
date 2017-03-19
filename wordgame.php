@@ -1,8 +1,46 @@
 <?php
 
 class WordGame {
-	function __construct() {}
-	
+	function __construct() {
+
+        $allLetters = 'abcdefghijklmnopqrstuvwxyz';
+        $lengthOfFinalWord = rand(2, 20);
+        $finalString = '';
+        for ($i = 0; $i <= $lengthOfFinalWord; $i++) {
+            $randomLetter = rand(0, strlen($allLetters) - 1);
+            $finalString = $finalString . $allLetters[$randomLetter];
+        }
+
+
+
+
+        $wordsInArray = [];
+        $file = fopen("wordlist.txt", "r");
+        if ($file) {
+            while (($line = fgets($file)) !== false) {
+                $wordsInArray[] = $line;
+            }
+
+            fclose($file);
+        } else {
+            // error opening the file.
+        }
+
+
+
+        $generatedString = '';
+        for ($i = 0; $i <= strlen($finalString); $i++) {
+            $randomLetter =  rand(0, strlen($finalString) - 1);
+            $generatedString = $generatedString . $finalString[$randomLetter];
+        }
+
+        $wordIsInArray = in_array($generatedString, $wordsInArray);
+        var_dump($wordIsInArray);
+
+        var_dump($generatedString);
+
+    }
+
 	/*
 	Submit a word on behalf of a player. A word is accepted if its letters are
 	contained in the base string used to construct the game AND if it is in the
@@ -21,7 +59,11 @@ class WordGame {
 
 	@returns the score for the submitted word if the submission is accepted. And 0 otherwise.
 	*/
-	function submitWord($word) {}
+	function submitWord($word) {
+
+
+
+    }
 	
 	/*
 	Return word entry at given position in the high score list, position 0 being the
@@ -50,3 +92,9 @@ class WordGame {
 	*/
 	function getScoreAtPosition($position) {}
 }
+
+
+echo "my fav color is red <br>";
+
+$beginClass = new WordGame;
+
